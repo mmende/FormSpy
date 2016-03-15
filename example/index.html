@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>FormSpy example</title>
+ 		
+ 		<script type="text/javascript" src="../node_modules/observe-js/src/observe.js"></script>
+		<script type="text/javascript" src="../build/formspy.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h3>Text inputs:</h3>
+					<input type="text" class="form-control" id="text1"><br>
+					<input type="text" class="form-control" id="text2"><br>
+					<input type="text" class="form-control" id="text3">
+				</div>
+				<div class="col-md-4">
+					<h3>Checkboxes:</h3>
+					<label><input type="checkbox" id="check1"> Salami</label><br>
+					<label><input type="checkbox" id="check2"> Some meat</label><br>
+
+					<label><input type="checkbox" id="check3"> Cheddar</label><br>
+					<label><input type="checkbox" id="check4"> Some cheese</label><br>
+				</div>
+				<div class="col-md-4">
+					<h3>Selects:</h3>
+					<p>I get paid in:</p>
+					<select id="select1" class="form-control">
+						<option value="$">Dollars</option>
+						<option value="€">Euros</option>
+						<option value="¥">Yens</option>
+					</select>
+					<p>but for some reason a never have much:</p>
+					<select id="select2" class="form-control">
+						<option value="$">Dollars</option>
+						<option value="€">Euros</option>
+						<option value="¥">Yens</option>
+					</select><br>
+					<button class="btn btn-default" id="unobserve">Unobserve second</button>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			// This is the data object that holds the value for the text fields
+			var data1 = {value: ''};
+
+			// Now we let FormSpy observe our inputs
+			var text1 = document.getElementById('text1');
+			FormSpy.observe(text1, data1);
+			var text2 = document.getElementById('text2');
+			FormSpy.observe(text2, data1);
+			var text1 = document.getElementById('text3');
+			FormSpy.observe(text3, data1);
+
+
+
+			// This is the data object that holds the value for the checkboxes
+			var data2 = { ingredients: { meat: false, cheese: false } };
+
+			// Now we let FormSpy observe our checkboxes
+			// We specify different path's here to store the values
+			var check1 = document.getElementById('check1');
+			FormSpy.observe(check1, data2, 'ingredients.meat');
+			var check2 = document.getElementById('check2');
+			FormSpy.observe(check2, data2, 'ingredients.meat');
+
+			var check3 = document.getElementById('check3');
+			FormSpy.observe(check3, data2, 'ingredients.cheese');
+			var check4 = document.getElementById('check4');
+			FormSpy.observe(check4, data2, 'ingredients.cheese');
+
+
+
+			// And finally for the selects
+			var data3 = {currency: ''};
+
+			var select1 = document.getElementById('select1');
+			FormSpy.observe(select1, data3, 'currency');
+			var select2 = document.getElementById('select2');
+			// We store the observerID to unobserve it later here
+			var observe42 = FormSpy.observe(select2, data3, 'currency');
+
+			// When #unobserve is clicked we unobserve select2
+			document.getElementById('unobserve').addEventListener('click', function() {
+				FormSpy.unobserve(observe42);
+			});
+		</script>
+	</body>
+</html>

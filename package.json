@@ -1,0 +1,22 @@
+{
+  "name": "FormSpy",
+  "description": "A javascript library for two way observation between form elements and objects",
+  "main": "build/formspy.min.js",
+  "directories": {
+    "example": "examples"
+  },
+  "version": "0.0.1",
+  "author": "Martin Mende",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-uglify": "^0.11.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-typescript": "^0.8.0",
+    "load-grunt-tasks": "^3.4.1"
+  },
+  "dependencies": {
+    "observe-js": "^0.5.7"
+  },
+  "license": "MIT"
+}
